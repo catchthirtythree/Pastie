@@ -24,22 +24,5 @@ namespace Utilities
                 return Convert.ToBase64String(bytes);
             }
         }
-
-        public static System.Drawing.Image Base64ToString(string base64)
-        {
-            byte[] bytes = Convert.FromBase64String(base64);
-
-            using (MemoryStream stream = new MemoryStream())
-            {
-                // write the image bytes to the stream
-                stream.Write(bytes, 0, bytes.Length);
-
-                // get the image from stream
-                Image image = Image.FromStream(stream, true);
-
-                // return image
-                return image;
-            }
-        }
     }
 }

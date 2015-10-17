@@ -16,7 +16,7 @@ namespace Utilities
 {
     class Imgur
     {
-        private static readonly string CLIENT_ID = "be97e107a50ee57";
+        private static readonly string CLIENT_ID = "";
         private static readonly string UPLOAD_URL = "https://api.imgur.com/3/upload.json";
 
         public ImgurResponse UploadImage(Image bmp, ImageFormat format)

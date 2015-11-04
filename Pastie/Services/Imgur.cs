@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pastie;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Drawing;
@@ -16,23 +17,30 @@ namespace Utilities
 {
     class Imgur
     {
-        private static readonly string CLIENT_ID = "";
-        private static readonly string UPLOAD_URL = "https://api.imgur.com/3/upload.json";
+        private static string CLIENT_ID = "be97e107a50ee57";
+        private static string UPLOAD_URL = "https://api.imgur.com/3/upload.json";
 
-        public ImgurResponse UploadImage(Image bmp, ImageFormat format)
+        public ImgurResponse UploadImage(Image bmp)
         {
             using (var webclient = new WebClient())
             {
-                webclient.Headers.Add("Authorization", "Client-ID " + CLIENT_ID);
-
-                var values = new NameValueCollection
+                try
                 {
-                    { "image", General.ImageToBase64(bmp, format) }
-                };
+                    webclient.Headers.Add("Authorization", "Client-ID " + CLIENT_ID);
 
-                var response = System.Text.Encoding.Default.GetString(webclient.UploadValues(UPLOAD_URL, values));
+                    var values = new NameValueCollection
+                    {
+                        { "image", General.ImageToBase64(bmp, Pastie.Properties.Settings.Default.ImageFormat) }
+                    };
 
-                return new JavaScriptSerializer().Deserialize<ImgurResponse>(response);
+                    var response = System.Text.Encoding.Default.GetString(webclient.UploadValues(UPLOAD_URL, values));
+
+                    return new JavaScriptSerializer().Deserialize<ImgurResponse>(response);
+                }
+                catch (WebException)
+                {
+                    return new ImgurResponse() { success = false };
+                }
             }
         }
     }

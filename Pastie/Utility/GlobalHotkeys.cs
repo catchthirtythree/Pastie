@@ -10,7 +10,6 @@ namespace Utilities
         public const int ALT = 0x0001;
         public const int CTRL = 0x0002;
         public const int SHIFT = 0x0004;
-        public const int WIN = 0x0008;
 
         public const int WM_HOTKEY_MSG_ID = 0x0312;
     }
@@ -27,15 +26,18 @@ namespace Utilities
             this.modifier = modifier;
             this.key = (int) key;
             this.hWnd = form.Handle;
-            this.id = this.GetHashCode();
+            this.id = GetHashCode();
         }
+
+        public Keys Key { set { this.key = (int) value; } }
+        public int Modifier { set { this.modifier = value; } }
 
         public bool Register()
         {
             return RegisterHotKey(hWnd, id, modifier, key);
         }
 
-        public bool Unregiser()
+        public bool Unregister()
         {
             return UnregisterHotKey(hWnd, id);
         }

@@ -10,25 +10,22 @@ namespace Utilities
 {
     static class Screenshot
     {
-        public static Image Take(int sourceX, int sourceY, int destX, int destY)
+        private static Pastie.Properties.Settings _settings = Pastie.Properties.Settings.Default;
+        public static Image Take(int sourceX, int sourceY, int destX, int destY, bool save = false)
         {
-            // Get the screen region size
             Size screenSize = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
-
-            // Get the image size
             Size imageSize = new Size(destX - sourceX, destY - sourceY);
 
-            // Create a new bitmap object
             Bitmap bmp = new Bitmap(imageSize.Width, imageSize.Height, PixelFormat.Format32bppArgb);
-
-            // Create a new graphics object from the bitmap
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                // Copy the screen into the bitmap
                 g.CopyFromScreen(sourceX, sourceY, 0, 0, imageSize);
 
-                // Save the image
-                bmp.Save("test.png", ImageFormat.Png);
+                if (_settings.SaveScreenshots)
+                {
+                    ImageFormat format = _settings.ImageFormat;
+                    bmp.Save(Pastie.Properties.Settings.Default.DateFormat + "." + format.ToString(), format);
+                }
             }
 
             return bmp;

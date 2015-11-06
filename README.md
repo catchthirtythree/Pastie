@@ -1,5 +1,5 @@
 # Pastie
-Lightweight screenshot application that uploads to imgur.
+Lightweight screenshot application for Windows that uploads to imgur.
 
 #### Currently working on:
 - Splash

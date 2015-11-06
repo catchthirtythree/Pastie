@@ -8,10 +8,5 @@ Lightweight screenshot application that uploads to imgur.
 - Versioning / Updates (In progress)
 - Release (installer / uninstaller) (In progress)
 
-#### Screenshots:
-![Previous Runs Fragment](http://i.imgur.com/lcC89Nn.png "Pastie icon + completed upload")
-
-![Previous Runs Fragment](http://i.imgur.com/nwfPDT4.png "Settings page")
-
 #### One day:
 - Create gifs
